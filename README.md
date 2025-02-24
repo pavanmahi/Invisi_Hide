@@ -42,7 +42,7 @@ InvisiHide is a web application designed for secure steganography, allowing user
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/pavanmahi/InvisiHide
+   git clone https://github.com/pavanmahi/Invisi_Hide
    cd InvisiHide
    ```
 2. Create and activate a virtual environment:
