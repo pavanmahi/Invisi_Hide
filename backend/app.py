@@ -1,10 +1,12 @@
 from flask import Flask, request, render_template, send_file ,jsonify
+from flask_cors import CORS
 import cv2
 import numpy as np
 import os
 from io import BytesIO
 
 app = Flask(__name__)
+CORS(app)
 
 def text_to_binary(text):
     return ''.join(format(ord(c), '08b') for c in text)
