@@ -126,7 +126,7 @@ def extract_hidden_data(stego_img, password_input):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return "Backend Running Successfully 🚀"
 
 @app.route('/embed_image', methods=['POST'])
 def embed_image():
