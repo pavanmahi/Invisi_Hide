@@ -63,7 +63,7 @@ function App() {
         formData.append('password', password);
 
         try {
-            const response = await axios.post('/embed_image', formData, { responseType: 'blob' });
+            const response = await axios.post('https://invisihide.onrender.com/embed_image', formData, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             setStegoImageUrl(url);
             setInstructionText('');
@@ -98,7 +98,7 @@ function App() {
         formData.append('password', password);
 
         try {
-            const response = await axios.post('/embed_text', formData, { responseType: 'blob' });
+            const response = await axios.post('https://invisihide.onrender.com/embed_text', formData, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             setStegoImageUrl(url);
             setInstructionText('');
@@ -112,7 +112,6 @@ function App() {
 
     const handleExtract = async (event) => {
         event.preventDefault();
-        console.log("Starting extraction process...");
         if (!coverImage) {
             setShowPopup(true);
             setPopupMessage('Please upload the stego image.');
@@ -130,15 +129,11 @@ function App() {
         formData.append('password', password);
     
         try {
-            console.log("📡 Sending request to backend...");
             const response = await axios.post('https://invisihide.onrender.com/extract', formData, { responseType: 'blob' });
-            console.log("✅ Response received:", response);
-
             const url = window.URL.createObjectURL(new Blob([response.data]));
             setExtractedType(response.headers['content-type']);
             setExtractedData(url);
             setShowExtractedData(true);
-            console.log("🎉 Extraction successful. Data ready for display.");
         } catch (error) {
             console.error('Error extracting data:', error);
     
@@ -148,9 +143,7 @@ function App() {
                 setExtractedData(null);
                 setExtractedType(null);
                 setShowExtractedData(false);
-                console.error("Password error", error);
             } else {
-                console.error("❌ Error from backend:", error);
                 setPopupMessage('Server Error. Please try again later.');
                 setShowPopup(true);
             }
