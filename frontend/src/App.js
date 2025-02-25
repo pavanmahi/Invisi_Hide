@@ -131,7 +131,7 @@ function App() {
     
         try {
             console.log("📡 Sending request to backend...");
-            const response = await axios.post('/extract', formData, { responseType: 'blob' });
+            const response = await axios.post('https://invisihide.onrender.com/extract', formData, { responseType: 'blob' });
             console.log("✅ Response received:", response);
 
             const url = window.URL.createObjectURL(new Blob([response.data]));
