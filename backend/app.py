@@ -6,7 +6,7 @@ import os
 from io import BytesIO
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://invisihide-frontend.onrender.com"])
 
 def text_to_binary(text):
     return ''.join(format(ord(c), '08b') for c in text)
