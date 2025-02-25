@@ -153,6 +153,7 @@ def embed_text():
 
 @app.route('/extract', methods=['POST'])
 def extract():
+    print('Extracting....')
     stego_image = request.files['stego_image']
     password = request.form['password']
     stego_img = cv2.imdecode(np.frombuffer(stego_image.read(), np.uint8), cv2.IMREAD_COLOR)
