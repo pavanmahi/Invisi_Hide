@@ -6,7 +6,7 @@ import os
 from io import BytesIO
 
 app = Flask(__name__)
-CORS(app, origins=["*"])
+CORS(app, origins=["https://invisihide-frontend.onrender.com"],supports_credentials=True)
 
 def text_to_binary(text):
     return ''.join(format(ord(c), '08b') for c in text)
@@ -132,6 +132,7 @@ def index():
 
 @app.route('/embed_image', methods=['POST'])
 def embed_image():
+    print("Embedding image...")
     cover_image = request.files['cover_image']
     hidden_image = request.files['hidden_image']
     password = request.form['password']
@@ -143,6 +144,7 @@ def embed_image():
 
 @app.route('/embed_text', methods=['POST'])
 def embed_text():
+    print("Embedded text...")
     cover_image = request.files['cover_image']
     hidden_text = request.form['hidden_text']
     password = request.form['password']
