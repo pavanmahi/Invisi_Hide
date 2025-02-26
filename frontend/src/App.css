@@ -4,12 +4,11 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh;
 }
-body::before{
-  background-image: url('steganography-bg.jpg');
+body::before {
+  background-image: url('background.jpg');
   background-size: cover;
   content: "";
   position: fixed;
@@ -21,33 +20,107 @@ body::before{
   opacity: 1;
   background-attachment: fixed;
 }
-
-.container {
-  background-color: white;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+.about-container {
+  padding: 20px 20px;
   text-align: center;
-  width: 100%; 
-  max-width: 480px; 
-  margin: 20px; 
+  line-height: 1.8;
+}
+.about-box{
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  padding: 20px;
 }
 
-h1 {
-  color: #333;
-  margin-top: 0;
+.about-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #dbdee3;
+  letter-spacing: 1px;
 }
 
-@media (max-width: 400px) {
-  .container {
-    width: 80%;
-  }
-
-  h1 {
-    font-size: 1.5em;
-  }
+.highlight {
+  color: #059de3;
 }
 
+.about-description {
+  font-size: 1.1rem;
+  color: #c5d5ef;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+
+.about-sub-description {
+  font-size: 1.05rem;
+  color: #f2eded;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  line-height: 1.7;
+}
+
+.features-heading {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.features-list {
+  list-style-type: none;
+  padding: 10px;
+  font-size: 1.1rem;
+  color: #cce0e0;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 1);
+  margin:0 10%;
+}
+
+.features-list li {
+  margin-bottom: 10px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.features-list li strong {
+  color: #10ecec;
+}
+
+.app-header{
+  color: rgb(255, 255, 255);
+  padding: 0 20px 0 20px;
+}
+
+.container-header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
 
 .feature-buttons button {
   margin: 10px;
@@ -60,34 +133,56 @@ h1 {
 }
 
 .feature-buttons button:hover {
-  background-color: #0056b3;
+  background-color: #099e0e;
+  color: black;
 }
 
+.content-box {
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 20px;
+  margin: 2% 20%;
+  text-align: center;
+}
+.content-box h2{
+  color: white;
+}
 form {
-  margin-top: 20px;
+  margin-top: 10px;
+  color: white;
 }
 
 input, textarea {
   display: block;
-  width: calc(100% - 20px);
+  width: 70%;
   margin: 10px auto;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #10aee8;
+  border-radius: 10px;
 }
-
+textarea{
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+}
+.password-container input::placeholder,
+textarea::placeholder {
+  color: white; 
+  opacity: 1; 
+}
 button[type="submit"] {
   margin-top: 20px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #28a745;
-  color: white;
+  background-color:  #33b249;
+  color: rgb(251, 251, 251);
   cursor: pointer;
 }
 
 button[type="submit"]:hover {
-  background-color: #218838;
+  background-color: #0c13d2;
 }
 
 .password-container {
@@ -98,12 +193,14 @@ button[type="submit"]:hover {
 .password-container input {
   width: calc(100% - 30px);
   display: inline-block;
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
 }
 
 .toggle-password {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 5px;
+  top: 15px;
   cursor: pointer;
   user-select: none;
 }
@@ -151,8 +248,8 @@ button[type="submit"]:hover {
 }
 
 .extracted-data img {
-  max-width: 80%;
-  height: 80%;
+  max-width: 90%;
+  height: 90%;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -175,7 +272,6 @@ button[type="submit"]:hover {
 
 .popup {
   left: 50%;
-  /* transform: translate(-50%, -50%); */
   background-color: rgb(119, 198, 222);
   width: 70%;
   margin-left: 15%;
@@ -198,4 +294,112 @@ button[type="submit"]:hover {
   cursor: pointer;
   font-size: 20px;
   user-select: none;
+}
+
+.app-footer {
+  color: #f3f4f6;
+  padding: 5px 0;
+  text-align: center;
+}
+
+.container-footer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 10px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-footer h2, .container-footer h3 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin: 10px;
+}
+
+.container-footer a {
+  color: #4f46e5;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.container-footer a:hover {
+  color: #818cf8;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.social-links img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  border-radius: 50%;
+  margin: 0;
+}
+
+.social-links img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(246, 246, 247, 0.5);
+}
+
+.copyright {
+  margin-top: 5px;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+@media (max-width: 450px) {
+  .container-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .app-header{
+    padding: 10px;
+  }
+  nav{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .about-li {
+    display: none;
+  }
+  .about-container {
+      padding: 30px 15px;
+  }
+
+  .about-title {
+      font-size: 1.8rem;
+  }
+
+  .about-description, .about-sub-description, .features-list li {
+      font-size: 1rem;
+  }
+  .content-box{
+    margin: 5px 10px;
+  }
+  .features-list{
+    margin: 0px;
+  }
+  .container-footer h2, .container-footer h3 {
+    font-size: 1.5rem;
+  }
+
+  .social-links img {
+    width: 30px;
+    height: 30px;
+  }
+  .container-footer{
+    justify-content: center;
+  }
 }
