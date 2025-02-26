@@ -153,6 +153,9 @@ form {
   margin-top: 10px;
   color: white;
 }
+form input[type="file"]{
+  cursor: pointer;
+}
 
 input, textarea {
   display: block;
