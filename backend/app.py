@@ -87,17 +87,29 @@ def extract_text_with_length(stego_img, idx_start):
         idx += 1
     return binary_to_text(text_bits)
 
+# def embed_image_in_image(cover_img, hidden_img, cover_path, password):
+#     hidden_resized = cv2.resize(hidden_img, (cover_img.shape[1], cover_img.shape[0]))
+#     hidden_resized = cv2.GaussianBlur(hidden_resized, (3, 3), 0)
+#     stego_img = cover_img.copy()
+#     embed_metadata(stego_img, "IMG")
+#     embed_password(stego_img, password)
+#     idx_offset = (24 + len(password + "::ENDPWD") * 8) // stego_img.shape[1] + 1
+#     for i in range(3):
+#         for row in range(idx_offset, stego_img.shape[0]):
+#             for col in range(stego_img.shape[1]):
+#                 stego_img[row, col, i] = (cover_img[row, col, i] & 0b11111000) | (hidden_resized[row, col, i] >> 5)
+#     return stego_img
+
 def embed_image_in_image(cover_img, hidden_img, cover_path, password):
     hidden_resized = cv2.resize(hidden_img, (cover_img.shape[1], cover_img.shape[0]))
     hidden_resized = cv2.GaussianBlur(hidden_resized, (3, 3), 0)
     stego_img = cover_img.copy()
+
     embed_metadata(stego_img, "IMG")
     embed_password(stego_img, password)
+
     idx_offset = (24 + len(password + "::ENDPWD") * 8) // stego_img.shape[1] + 1
-    for i in range(3):
-        for row in range(idx_offset, stego_img.shape[0]):
-            for col in range(stego_img.shape[1]):
-                stego_img[row, col, i] = (cover_img[row, col, i] & 0b11111000) | (hidden_resized[row, col, i] >> 5)
+    stego_img[idx_offset:, :, :] = (cover_img[idx_offset:, :, :] & 0b11111000) | (hidden_resized[idx_offset:, :, :] >> 5)
     return stego_img
 
 def embed_text_in_image(cover_img, hidden_text, cover_path, password):
