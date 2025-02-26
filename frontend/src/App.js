@@ -117,6 +117,8 @@ function App() {
 
     const handleExtract = async (event) => {
         event.preventDefault();
+        setShowExtractedData(false);
+
         if (!coverImage) {
             setShowPopup(true);
             setPopupMessage('Please upload the stego image.');
@@ -145,15 +147,18 @@ function App() {
             setShowExtractedData(true);
         } catch (error) {
             console.error('Error extracting data:', error);
-            setInstructionText('');
-            setIsLoading(false);
+            
             if (error.response && error.response.status === 400) {
+                setInstructionText('');
+                setIsLoading(false);
                 setPopupMessage('Incorrect password. Please try again.');
                 setShowPopup(true);
                 setExtractedData(null);
                 setExtractedType(null);
                 setShowExtractedData(false);
             } else {
+                setInstructionText('');
+                setIsLoading(false);
                 setPopupMessage('Server Error. Please try again later.');
                 setShowPopup(true);
             }
