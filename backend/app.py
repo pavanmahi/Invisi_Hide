@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import os
 from io import BytesIO
+import traceback
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://invisihide-frontend.onrender.com"}}, supports_credentials=True)
@@ -130,21 +131,51 @@ def extract_hidden_data(stego_img, password_input):
 def index():
     return "Backend Running Successfully 🚀"
 
+from flask import request, jsonify, send_file
+import traceback
+import cv2
+import numpy as np
+from io import BytesIO
+
 @app.route('/embed_image', methods=['POST'])
 def embed_image():
-    print("Embedding image...")
-    cover_image = request.files['cover_image']
-    hidden_image = request.files['hidden_image']
-    password = request.form['password']
-    cover_img = cv2.imdecode(np.frombuffer(cover_image.read(), np.uint8), cv2.IMREAD_COLOR)
-    hidden_img = cv2.imdecode(np.frombuffer(hidden_image.read(), np.uint8), cv2.IMREAD_COLOR)
-    stego_img = embed_image_in_image(cover_img, hidden_img, cover_image.filename, password)
-    _, buffer = cv2.imencode('.png', stego_img)
-    return send_file(BytesIO(buffer), mimetype='image/png', as_attachment=True, download_name='stego_image.png')
+    try:
+        print("Embedding image...")  
+
+        cover_image = request.files.get('cover_image')
+        hidden_image = request.files.get('hidden_image')
+        password = request.form.get('password')
+
+        if not cover_image or not hidden_image or not password:
+            print("Missing required fields") 
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        cover_img = cv2.imdecode(np.frombuffer(cover_image.read(), np.uint8), cv2.IMREAD_COLOR)
+        hidden_img = cv2.imdecode(np.frombuffer(hidden_image.read(), np.uint8), cv2.IMREAD_COLOR)
+
+        if cover_img is None or hidden_img is None:
+            print("Failed to decode one or both images.") 
+            return jsonify({'error': 'Image decoding failed. Ensure valid image files.'}), 400
+
+        print(f"Embedding {hidden_image.filename} into {cover_image.filename} with password: {password}")
+        stego_img = embed_image_in_image(cover_img, hidden_img, cover_image.filename, password)
+
+        _, buffer = cv2.imencode('.png', stego_img)
+        if buffer is None:
+            print("Failed to encode stego image.") 
+            return jsonify({'error': 'Failed to encode stego image.'}), 500
+
+        print("Image embedding successful.")
+        return send_file(BytesIO(buffer), mimetype='image/png', as_attachment=True, download_name='stego_image.png')
+
+    except Exception as e:
+        error_trace = traceback.format_exc()
+        print(f"Exception occurred:\n{error_trace}")
+        return jsonify({'error': 'Internal Server Error', 'details': str(e)}), 500
 
 @app.route('/embed_text', methods=['POST'])
 def embed_text():
-    print("Embedded text...")
+    print("Embedding text...")
     cover_image = request.files['cover_image']
     hidden_text = request.form['hidden_text']
     password = request.form['password']
