@@ -42,7 +42,7 @@ body::before {
 }
 
 .highlight {
-  color: #059de3;
+  color: rgb(1, 242, 250);
 }
 
 .about-description {
