@@ -145,7 +145,8 @@ function App() {
             setShowExtractedData(true);
         } catch (error) {
             console.error('Error extracting data:', error);
-    
+            setInstructionText('');
+            setIsLoading(false);
             if (error.response && error.response.status === 400) {
                 setPopupMessage('Incorrect password. Please try again.');
                 setShowPopup(true);
@@ -157,6 +158,7 @@ function App() {
                 setShowPopup(true);
             }
         }
+        
     };
 
     const closePopup = () => {
