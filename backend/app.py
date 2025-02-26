@@ -6,7 +6,7 @@ import os
 from io import BytesIO
 
 app = Flask(__name__)
-CORS(app, origins=["https://invisihide-frontend.onrender.com"],supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "https://invisihide-frontend.onrender.com"}}, supports_credentials=True)
 
 def text_to_binary(text):
     return ''.join(format(ord(c), '08b') for c in text)
@@ -172,6 +172,13 @@ def extract():
             return {"error": "Incorrect password"}, 400
         else:
             return {"error": str(e)}, 400
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'https://invisihide-frontend.onrender.com')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)
