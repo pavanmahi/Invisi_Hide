@@ -75,8 +75,8 @@ function App() {
             setIsLoading(false);
         } catch (error) {
             console.error('Error embedding image:', error);
-            setInstructionText('');
-            setIsLoading(false);
+            setInstructionText('Error embedding image...');
+            setIsLoading(true);
         }
     };
 
@@ -110,8 +110,8 @@ function App() {
             setIsLoading(false);
         } catch (error) {
             console.error('Error embedding text:', error);
-            setInstructionText('');
-            setIsLoading(false);
+            setInstructionText("Error embedding text...");
+            setIsLoading(true);
         }
     };
 
@@ -128,6 +128,8 @@ function App() {
             setPopupMessage('Please enter a password.');
             return;
         }
+        setInstructionText('Please wait while we extract the data...');
+        setIsLoading(true);
         setShowPopup(false);
         const formData = new FormData();
         formData.append('stego_image', coverImage);
@@ -138,6 +140,8 @@ function App() {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             setExtractedType(response.headers['content-type']);
             setExtractedData(url);
+            setInstructionText('');
+            setIsLoading(false);
             setShowExtractedData(true);
         } catch (error) {
             console.error('Error extracting data:', error);
