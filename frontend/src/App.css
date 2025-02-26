@@ -39,6 +39,7 @@ body::before {
   font-weight: 700;
   color: #dbdee3;
   letter-spacing: 1px;
+  margin: 10px 0;
 }
 
 .highlight {
@@ -110,6 +111,8 @@ body::before {
   list-style: none;
   display: flex;
   gap: 20px;
+  padding: 0;
+  margin: 10px 0 0 0;
 }
 
 .nav-links a {
@@ -378,11 +381,14 @@ button[type="submit"]:hover {
     display: none;
   }
   .about-container {
-      padding: 30px 15px;
+      padding: 10px 15px;
   }
 
   .about-title {
       font-size: 1.8rem;
+  }
+  .about-sub-description{
+    margin-bottom: 0;
   }
 
   .about-description, .about-sub-description, .features-list li {

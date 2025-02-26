@@ -185,7 +185,7 @@ function App() {
         <div className="app-container">
             <header className="app-header">
                 <div className="container-header">
-                    <h1>InvisiHide</h1>
+                    <h1 style={{margin:'5px 0 0 0px'}}>InvisiHide</h1>
                     <nav>
                         <ul className="nav-links">
                             <li class="about-li"><a href="#about">About Us</a></li>
