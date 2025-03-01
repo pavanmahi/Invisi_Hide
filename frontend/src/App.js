@@ -163,7 +163,6 @@ function App() {
                 setShowPopup(true);
             }
         }
-        
     };
 
     const closePopup = () => {
