@@ -143,12 +143,6 @@ def extract_hidden_data(stego_img, password_input):
 def index():
     return "Backend Running Successfully 🚀"
 
-from flask import request, jsonify, send_file
-import traceback
-import cv2
-import numpy as np
-from io import BytesIO
-
 @app.route('/embed_image', methods=['POST'])
 def embed_image():
     try:
