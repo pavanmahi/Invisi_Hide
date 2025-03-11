@@ -126,7 +126,6 @@ Werkzeug==2.0.1
 For queries or contributions:
 
 - 📧 Email: [pavanbejawada4376@gmail.com](mailto:pavanbejawada4376@gmail.com)
-- 🌐 GitHub: [pavanmahi](https://github.com/pavanmahi)
 
 ---
 
