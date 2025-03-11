@@ -1,5 +1,9 @@
 # InvisiHide - Secure Steganography Web Application
 
+## 🌐 Live Demo
+
+You can access the live version of the InvisiHide web application [here](https://invisihide-frontend.onrender.com).
+
 ## 🔍 **Project Overview**
 
 InvisiHide is a web application designed for secure steganography, allowing users to embed and extract hidden text or images within cover images. The project ensures data privacy with password protection and a user-friendly interface. Built using React.js for the frontend and Python Flask for the backend, InvisiHide leverages OpenCV for image processing and NumPy for efficient data handling.
